@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/shared/container/infra/http/server.ts",
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/shared/container/infra/https/server.ts",
     "typeorm": "npx typeorm-ts-node-commonjs migration:create ./src/shared/container/infra/typeorm/database/migrations/CreateName",
     "typeorm-run": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/container/infra/typeorm/database/index.ts"
   },
