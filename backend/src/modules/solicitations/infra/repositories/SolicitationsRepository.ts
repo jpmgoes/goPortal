@@ -11,12 +11,14 @@ class SolicitationsRepository implements ISolicitationsRepository {
 	}
 
 	async create({
+		id,
 		name,
 		description,
 		user_id,
 		is_open = true,
 	}: ICreateSolicitationsDTO): Promise<Solicitations> {
 		const solicitation = this.repository.create({
+			id,
 			name,
 			description,
 			user_id,
