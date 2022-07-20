@@ -14,7 +14,7 @@ class SolicitationsRepository implements ISolicitationsRepository {
 		name,
 		description,
 		user_id,
-		is_open = false,
+		is_open = true,
 	}: ICreateSolicitationsDTO): Promise<Solicitations> {
 		const solicitation = this.repository.create({
 			name,
@@ -31,6 +31,10 @@ class SolicitationsRepository implements ISolicitationsRepository {
 
 	async list(user_id: string): Promise<Solicitations[]> {
 		return await this.repository.find({ where: { user_id } });
+	}
+
+	async findById(id: string): Promise<Solicitations> {
+		return this.repository.findOne({ where: { id } });
 	}
 }
 
