@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
 import * as bodyParser from "body-parser";
 import "reflect-metadata";
 import cors from "cors";
