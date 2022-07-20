@@ -6,7 +6,7 @@ interface IUsersRepository {
 	findByEmail(email: string): Promise<User>;
 	findById(id: string): Promise<User>;
 	// list(): Promise<User[]>;
-	createSpecification({
+	createSolicitation({
 		name,
 		description,
 		user_id,
