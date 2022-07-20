@@ -1,12 +1,17 @@
 import { Solicitations } from "../../../solicitations/infra/entities/Solicitations";
 
 interface ICreateUserDTO {
+	id?: string;
 	name: string;
 	password: string;
 	email: string;
-	driver_license: string;
-	id?: string;
-	avatar?: string;
+	birthday: string;
+	age: string;
+	cpf: string;
+	fone_number: string;
+	profession: string;
+	salary: string;
+	avatar: string;
 	solicitations?: Solicitations[];
 }
 
