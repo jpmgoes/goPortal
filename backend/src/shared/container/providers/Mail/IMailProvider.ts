@@ -6,3 +6,5 @@ interface IMailProvider {
 		path: string
 	): Promise<void>;
 }
+
+export { IMailProvider };
