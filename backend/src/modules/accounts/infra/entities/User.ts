@@ -11,6 +11,12 @@ class User {
 
 	@Column()
 	email: string;
+    
+    @Column()
+	birthday: string;
+    
+    @Column()
+	age: string;
 
 	@Column()
 	password: string;
