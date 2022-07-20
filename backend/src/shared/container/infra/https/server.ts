@@ -6,6 +6,7 @@ import cors from "cors";
 
 import "../typeorm/database";
 import "../../../container";
+import "../../providers"
 
 import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
