@@ -31,6 +31,8 @@ class CloseSolicitationUseCases {
 			solicitation.user_id
 		);
 
+		if (solicitation.is_open === false) return;
+
 		const templatePath = resolve(
 			__dirname,
 			"..",
@@ -45,7 +47,6 @@ class CloseSolicitationUseCases {
 			link: `${link}/?token=${2}`,
 		};
 
-		if (solicitation.is_open === false) return;
 		solicitation.is_open = false;
 		this.solicitationsRepository.create(solicitation);
 
