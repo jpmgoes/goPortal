@@ -9,7 +9,7 @@ class CloseSolicitationController {
 			CloseSolicitationUseCases
 		);
 		await createCateogryUseCase.execute(id);
-		return res.sendStatus(201);
+		return res.send();
 	}
 }
 
