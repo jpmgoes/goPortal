@@ -29,22 +29,14 @@ export default function useSolicitation() {
 	async function createSolicitation(name, description) {
 		const token = localStorage.getItem("token");
 		if (token) {
-			await api.post(
-				"/solicitation",
-				{ name, description },
-				{ headers: { Authorization: `Bearer ${token}` } }
-			);
+			await api.post("/solicitation", { name, description });
 		}
 	}
 
 	async function closeSolicitation(id, reply, link) {
 		const token = localStorage.getItem("token");
 		if (token) {
-			await api.post(
-				`/solicitation/close`,
-				{ id, reply, link },
-				{ headers: { Authorization: `Bearer ${token}` } }
-			);
+			await api.post(`/solicitation/close`, { id, reply, link });
 		}
 	}
 
