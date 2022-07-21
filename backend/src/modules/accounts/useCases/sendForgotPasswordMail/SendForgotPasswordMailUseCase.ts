@@ -22,7 +22,7 @@ class SendForgotPasswordMailUseCase {
 		@inject("MailtrapMailProvider")
 		private mailtrapMailProvider: IMailProvider
 	) {}
-	async execute(email: string): Promise<void> {
+	async execute(email: string, link: string): Promise<void> {
 		const user = await this.usersRepository.findByEmail(email);
 
 		if (!user) throw new AppError("User does not exist!");
@@ -45,7 +45,7 @@ class SendForgotPasswordMailUseCase {
 
 		const variables = {
 			name: user.name,
-			link: `http://localhost:3333/password/reset?token=${token}`,
+			link: `${link}/?token=${token}`,
 		};
 
 		await this.mailtrapMailProvider.sendMail(
