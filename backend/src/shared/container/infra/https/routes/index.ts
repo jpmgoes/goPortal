@@ -8,5 +8,6 @@ const router = Router();
 router.use("/users", usersRouter);
 router.use(authenticateRouter);
 router.use("/password", passwordRouter)
+router.use("/solicitation", passwordRouter)
 
 export { router };
