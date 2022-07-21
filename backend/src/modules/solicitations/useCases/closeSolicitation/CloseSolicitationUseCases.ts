@@ -35,7 +35,8 @@ class CloseSolicitationUseCases {
 			solicitation.user_id
 		);
 
-		if (solicitation.is_open === false) return;
+		if (solicitation.is_open === false)
+			throw new AppError("Solicitation alredy closed!");
 
 		const templatePath = resolve(
 			__dirname,
