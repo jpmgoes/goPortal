@@ -37,6 +37,16 @@ export default function useSolicitation() {
 		}
 	}
 	// close a solicitation
+	async function closeSolicitation(id, reply, link) {
+		const token = localStorage.getItem("token");
+		if (token) {
+			await api.post(
+				`/solicitation/close`,
+				{ id, reply, link },
+				{ headers: { Authorization: `Bearer ${token}` } }
+			);
+		}
+	}
 
 	return { solicitations };
 }
