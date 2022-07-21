@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import uploadConfig from "../../../../../config/upload";
 import { CreateUserController } from "../../../../../modules/accounts/useCases/createUser/CreateUserController";
+import { GetUserInfosByTokenController } from "../../../../../modules/accounts/useCases/getUserInfosByToken/GetUserInfosByTokenController";
 import { ResetMailUserController } from "../../../../../modules/accounts/useCases/resetMailUser/ResetMailUserController";
 import { SendChangeUserMailController } from "../../../../../modules/accounts/useCases/sendChangeUserMail/SendChangeUserMailController";
 import { UpdateUserController } from "../../../../../modules/accounts/useCases/updateUser/UpdateUserController";
@@ -17,6 +18,7 @@ const updateUserAvatarController = new UpdateUserAvatarController();
 const updateUserControler = new UpdateUserController();
 const sendChangeUserMailController = new SendChangeUserMailController();
 const resetMailUserController = new ResetMailUserController();
+const getUserInfosByTokenController = new GetUserInfosByTokenController();
 
 usersRouter.post("/", createUserController.handle);
 
@@ -30,5 +32,5 @@ usersRouter.post("/update", updateUserControler.handle);
 
 usersRouter.post("/update/email", sendChangeUserMailController.handle);
 usersRouter.post("/update/email/reset", resetMailUserController.handle);
-
+usersRouter.get("/", getUserInfosByTokenController.handle);
 export { usersRouter };
