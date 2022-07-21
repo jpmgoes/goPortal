@@ -20,6 +20,10 @@ export class CreateSolicitations1658183619639 implements MigrationInterface {
 						type: "varchar",
 					},
 					{
+						name: "reply",
+						type: "varchar",
+					},
+					{
 						name: "is_open",
 						type: "boolean",
 						default: true,
