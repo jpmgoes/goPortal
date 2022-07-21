@@ -8,6 +8,7 @@ import { IMailProvider } from "../../../../shared/container/providers/Mail/IMail
 interface IRequest {
 	id: string;
 	link: string;
+	reply: string;
 }
 
 @injectable()
@@ -23,7 +24,10 @@ class CloseSolicitationUseCases {
 		private mailtrapMailProvider: IMailProvider
 	) {}
 
-	async execute({ id, link }: IRequest): Promise<void> {
+	async execute({ id, link, reply }: IRequest): Promise<void> {
+		if (reply.length == 0)
+			throw new AppError("Reply need to contain something");
+
 		const solicitation = await this.solicitationsRepository.findById(id);
 		if (!solicitation) throw new AppError("Solicitation does not exist!");
 
@@ -44,6 +48,8 @@ class CloseSolicitationUseCases {
 
 		const variables = {
 			name: name,
+			title: solicitation.name,
+			reply,
 			link: `${link}/?token=${solicitation.id}`,
 		};
 
