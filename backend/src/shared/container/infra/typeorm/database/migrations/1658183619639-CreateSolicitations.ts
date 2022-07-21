@@ -22,7 +22,7 @@ export class CreateSolicitations1658183619639 implements MigrationInterface {
 					{
 						name: "is_open",
 						type: "boolean",
-						default: false
+						default: true,
 					},
 					{
 						name: "user_id",
