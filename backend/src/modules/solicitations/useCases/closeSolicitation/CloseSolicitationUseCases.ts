@@ -44,7 +44,7 @@ class CloseSolicitationUseCases {
 
 		const variables = {
 			name: name,
-			link: `${link}/?token=${2}`,
+			link: `${link}/?token=${solicitation.id}`,
 		};
 
 		solicitation.is_open = false;
