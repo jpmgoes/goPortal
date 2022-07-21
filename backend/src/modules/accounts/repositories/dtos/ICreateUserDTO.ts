@@ -12,7 +12,6 @@ interface ICreateUserDTO {
 	profession: string;
 	salary: string;
 	avatar: string;
-	solicitations?: Solicitations[];
 }
 
 export { ICreateUserDTO };
