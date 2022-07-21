@@ -16,6 +16,7 @@ class SolicitationsRepository implements ISolicitationsRepository {
 		description,
 		user_id,
 		is_open = true,
+		reply = ""
 	}: ICreateSolicitationsDTO): Promise<Solicitations> {
 		const solicitation = this.repository.create({
 			id,
@@ -23,6 +24,7 @@ class SolicitationsRepository implements ISolicitationsRepository {
 			description,
 			user_id,
 			is_open,
+			reply,
 		});
 		return await this.repository.save(solicitation);
 	}
