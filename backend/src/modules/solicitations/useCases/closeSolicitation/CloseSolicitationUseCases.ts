@@ -17,6 +17,7 @@ class CloseSolicitationUseCases {
 		const solicitation = await this.solicitationsRepository.findById(id);
 		if (!solicitation) throw new AppError("Solicitation does not exist!");
 
+		if (solicitation.is_open === false) return;
 		solicitation.is_open = false;
 		this.solicitationsRepository.create(solicitation);
 	}
