@@ -1,4 +1,5 @@
 interface ICreateSolicitationsDTO {
+	id?: string;
 	name: string;
 	description: string;
 	is_open?: boolean;
