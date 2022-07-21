@@ -16,6 +16,13 @@ interface IResponse {
 	user: {
 		name: string;
 		email: string;
+		birthday: string;
+		age: string;
+		cpf: string;
+		fone_number: string;
+		profession: string;
+		salary: string;
+		avatar: string;
 	};
 	token: string;
 	refresh_token: string;
@@ -65,6 +72,13 @@ class AuthenticateUserUseCase {
 			user: {
 				name: user.name,
 				email: user.email,
+				cpf: user.cpf,
+				birthday: user.birthday,
+				age: user.age,
+				profession: user.profession,
+				avatar: `http://localhost:3333/tmp/avatar/${user.avatar}`,
+				salary: user.salary,
+				fone_number: user.fone_number,
 			},
 			token,
 			refresh_token,
