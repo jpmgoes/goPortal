@@ -6,14 +6,14 @@ import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const solicitationsRouter = Router();
 
-const createUserSpecificationController = new CreateSolicitationController();
-const listSpecificationController = new ListSolicitationsController();
+const createSolicitationController = new CreateSolicitationController();
+const listSolicitationsController = new ListSolicitationsController();
 const closeSolicitationController = new CloseSolicitationController();
 
 solicitationsRouter.use(ensureAuthenticated);
 
-solicitationsRouter.post("/", createUserSpecificationController.handle);
-solicitationsRouter.get("/", listSpecificationController.handle);
+solicitationsRouter.post("/", createSolicitationController.handle);
+solicitationsRouter.get("/", listSolicitationsController.handle);
 solicitationsRouter.post("/close", closeSolicitationController.handle);
 
 export { solicitationsRouter };
