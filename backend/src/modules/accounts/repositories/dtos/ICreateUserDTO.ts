@@ -1,5 +1,3 @@
-import { Solicitations } from "../../../solicitations/infra/entities/Solicitations";
-
 interface ICreateUserDTO {
 	id?: string;
 	name: string;
