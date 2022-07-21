@@ -29,6 +29,6 @@ usersRouter.patch(
 usersRouter.post("/update", updateUserControler.handle);
 
 usersRouter.post("/update/email", sendChangeUserMailController.handle);
-usersRouter.post("/update/email/reset", sendChangeUserMailController.handle);
+usersRouter.post("/update/email/reset", resetMailUserController.handle);
 
 export { usersRouter };
