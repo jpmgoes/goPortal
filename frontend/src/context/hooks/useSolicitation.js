@@ -18,7 +18,13 @@ export default function useSolicitation() {
 		}
 	}, []);
 
-	// get all solicitations
+	async function getSolicitations() {
+		const token = localStorage.getItem("token");
+		if (token) {
+			const res = await api.get("/solicitation");
+			setSolicitations(res.data);
+		}
+	}
 	// create a new solicitation
 	// close a solicitation
 
