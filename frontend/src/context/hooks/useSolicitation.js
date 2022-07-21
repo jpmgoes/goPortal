@@ -26,6 +26,16 @@ export default function useSolicitation() {
 		}
 	}
 	// create a new solicitation
+	async function createSolicitation(name, description) {
+		const token = localStorage.getItem("token");
+		if (token) {
+			await api.post(
+				"/solicitation",
+				{ name, description },
+				{ headers: { Authorization: `Bearer ${token}` } }
+			);
+		}
+	}
 	// close a solicitation
 
 	return { solicitations };
