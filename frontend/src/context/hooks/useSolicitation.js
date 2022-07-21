@@ -48,5 +48,10 @@ export default function useSolicitation() {
 		}
 	}
 
-	return { solicitations };
+	return {
+		solicitations,
+		getSolicitations,
+		createSolicitation,
+		closeSolicitation,
+	};
 }
