@@ -25,7 +25,7 @@ export default function useSolicitation() {
 			setSolicitations(res.data);
 		}
 	}
-	// create a new solicitation
+
 	async function createSolicitation(name, description) {
 		const token = localStorage.getItem("token");
 		if (token) {
@@ -36,7 +36,7 @@ export default function useSolicitation() {
 			);
 		}
 	}
-	// close a solicitation
+
 	async function closeSolicitation(id, reply, link) {
 		const token = localStorage.getItem("token");
 		if (token) {
