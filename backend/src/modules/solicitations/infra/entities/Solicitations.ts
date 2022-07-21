@@ -18,6 +18,9 @@ class Solicitations {
 	public description: string;
 
 	@Column()
+	public reply: string;
+
+	@Column()
 	public is_open: boolean;
 
 	@Column()
