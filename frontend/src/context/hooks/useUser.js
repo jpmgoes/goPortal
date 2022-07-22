@@ -5,6 +5,7 @@ import api from "../../api";
 export default function useUser() {
 	const [user, setUser] = useState(null);
 	const [userImg, setUserImg] = useState(null);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -17,15 +18,36 @@ export default function useUser() {
 		}
 	}, []);
 
-	async function handleSendForgotPassword(email, link) {
-		console.log("handleSendForgotPassword");
-		await api.post("/password/forgot", { email, link });
+	async function createUser(data) {
+		try {
+			const res = await api.post("/users", data);
+			setError(res);
+		} catch (err) {
+			setError(err.response);
+		}
 	}
 
-	async function handleChangePassword(password) {
-		console.log("handleChangePassword");
+	async function handleRequestNewPassword(email) {
+		const link = "http://localhost:3000/change/pass";
+		api.post("/password/forgot", { email, link })
+			.then((res) => {
+				setError(res);
+			})
+			.catch((err) => {
+				setError(err.response);
+			});
+	}
+
+	//! testar
+	async function handleNewPassword(password) {
 		const token = window.location.search.split("=")[1];
-		await api.post("/password/reset", { password }, { params: { token } });
+		api.post("/password/reset", { password }, { params: { token } })
+			.then((res) => {
+				setError(res);
+			})
+			.catch((err) => {
+				setError(err.response);
+			});
 	}
 
 	async function handleUpdateUser(
@@ -58,27 +80,16 @@ export default function useUser() {
 		});
 	}
 
-	async function handleSendChangeEmail(link) {
-		console.log("handleSendChangeEmail");
-		await api.post("/users/update/email", { link });
-	}
-
-	async function handleChangeEmail(email) {
-		console.log("handleChangeEmail");
-		const token = window.location.search.split("=")[1];
-		await api.post("/users/update/email", { email }, { params: { token } });
-	}
-
 	return {
 		user,
+		createUser,
+		error,
 		setUser,
 		userImg,
 		setUserImg,
-		handleSendForgotPassword,
-		handleChangePassword,
+		handleNewPassword,
+		handleRequestNewPassword,
 		handleUpdateUser,
 		handleUpdateAvatar,
-		handleSendChangeEmail,
-		handleChangeEmail,
 	};
 }
