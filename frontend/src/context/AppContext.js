@@ -12,7 +12,11 @@ const AppContext = ({ children }) => {
 
 	return (
 		<Context.Provider
-			value={{ authContext, soliticationContext, userContext }}
+			value={{
+				authContext,
+				soliticationContext,
+				userContext,
+			}}
 		>
 			{children}
 		</Context.Provider>
