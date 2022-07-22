@@ -11,6 +11,7 @@ class CreateUserUseCase {
 		private usersRepository: IUsersRepository
 	) {}
 	async execute(data: ICreateUserDTO): Promise<void> {
+		data.avatar = "";
 		const userAlredyExist = await this.usersRepository.findByEmail(
 			data.email
 		);
