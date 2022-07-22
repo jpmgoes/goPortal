@@ -6,6 +6,7 @@ import useUser from "./useUser";
 export default function useAuth() {
 	const [authenticated, setAuthenticated] = useState(false);
 	const [loading, setLoading] = useState("/");
+	const [error, setError] = useState("");
 	const userContext = useUser();
 
 	useEffect(() => {
@@ -18,13 +19,19 @@ export default function useAuth() {
 	}, []);
 
 	async function handleLogin(email, password) {
-		const response = await api.post("/sessions", { email, password });
-		const {
-			data: { refresh_token },
-		} = response;
-		localStorage.setItem("token", JSON.stringify(refresh_token));
-		api.defaults.headers.Authorization = `Bearer ${refresh_token}`;
-		setAuthenticated(true);
+		api.post("/sessions", { email, password })
+			.then((res) => {
+				localStorage.setItem(
+					"token",
+					JSON.stringify(res.data.refresh_token)
+				);
+				api.defaults.headers.Authorization = `Bearer ${res.data.refresh_token}`;
+				setAuthenticated(true);
+				setLoading("/");
+			})
+			.catch((err) => {
+				setError(err);
+			});
 	}
 
 	function handleLogout() {
@@ -34,5 +41,12 @@ export default function useAuth() {
 		userContext.setUser(null);
 	}
 
-	return { authenticated, loading, setLoading, handleLogin, handleLogout };
+	return {
+		authenticated,
+		loading,
+		setLoading,
+		handleLogin,
+		handleLogout,
+		error,
+	};
 }
