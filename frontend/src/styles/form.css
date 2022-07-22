@@ -1,0 +1,61 @@
+.error {
+	color: red;
+	font-size: 14px;
+	padding: 10px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 300px;
+	height: 100%;
+	overflow: hidden;
+}
+
+input {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 0 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-family: "Libre Franklin", sans-serif, "Roboto", sans-serif,
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	color: #1a3754;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.button {
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+	background-color: #1a3754;
+	color: #fff;
+}
+
+p {
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+input.checkbox {
+	width: auto;
+	height: auto;
+	margin-right: 10px;
+	text-align: right;
+}
+
+.show-pass-label {
+	width: 100%;
+	display: flex;
+	align-items: baseline;
+	justify-content: end;
+}
