@@ -12,6 +12,9 @@ class CreateUserUseCase {
 	) {}
 	async execute(data: ICreateUserDTO): Promise<void> {
 		data.avatar = "";
+		const bornYear = data.birthday.split("-")[0];
+		data.age = (new Date().getFullYear() - Number(bornYear)).toString();
+
 		const userAlredyExist = await this.usersRepository.findByEmail(
 			data.email
 		);
