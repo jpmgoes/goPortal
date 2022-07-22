@@ -5,7 +5,7 @@ import useUser from "./useUser";
 
 export default function useAuth() {
 	const [authenticated, setAuthenticated] = useState(false);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState("/");
 	const userContext = useUser();
 
 	useEffect(() => {
@@ -15,7 +15,6 @@ export default function useAuth() {
 			api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
 			setAuthenticated(true);
 		}
-		setLoading(false);
 	}, []);
 
 	async function handleLogin(email, password) {
@@ -35,5 +34,5 @@ export default function useAuth() {
 		userContext.setUser(null);
 	}
 
-	return { authenticated, loading, handleLogin, handleLogout };
+	return { authenticated, loading, setLoading, handleLogin, handleLogout };
 }
