@@ -8,6 +8,7 @@ export default function useSolicitation() {
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
+			console.log("setSolicitations");
 			api.get("/solicitation")
 				.then((res) => {
 					setSolicitations(res.data);
@@ -21,6 +22,7 @@ export default function useSolicitation() {
 	async function getSolicitations() {
 		const token = localStorage.getItem("token");
 		if (token) {
+			console.log("getSolicitations");
 			const res = await api.get("/solicitation");
 			setSolicitations(res.data);
 		}
@@ -29,6 +31,7 @@ export default function useSolicitation() {
 	async function createSolicitation(name, description) {
 		const token = localStorage.getItem("token");
 		if (token) {
+			console.log("createSolicitation");
 			await api.post("/solicitation", { name, description });
 		}
 	}
@@ -36,6 +39,7 @@ export default function useSolicitation() {
 	async function closeSolicitation(id, reply, link) {
 		const token = localStorage.getItem("token");
 		if (token) {
+			console.log("closeSolicitation");
 			await api.post(`/solicitation/close`, { id, reply, link });
 		}
 	}
