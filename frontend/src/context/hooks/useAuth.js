@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 
 import api from "../../api";
+import useUser from "./useUser";
 
 export default function useAuth() {
 	const [authenticated, setAuthenticated] = useState(false);
 	const [loading, setLoading] = useState(true);
-	const [user, setUser] = useState(null);
+	const userContext = useUser();
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 
 		if (token) {
 			api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-			api.get("/users").then((res) => {
-				setUser(res.data.user);
-			});
 			setAuthenticated(true);
 		}
 		setLoading(false);
@@ -25,8 +23,6 @@ export default function useAuth() {
 		const {
 			data: { refresh_token },
 		} = response;
-		setUser(response.data);
-
 		localStorage.setItem("token", JSON.stringify(refresh_token));
 		api.defaults.headers.Authorization = `Bearer ${refresh_token}`;
 		setAuthenticated(true);
@@ -34,10 +30,10 @@ export default function useAuth() {
 
 	function handleLogout() {
 		setAuthenticated(false);
-		setUser(null);
 		localStorage.removeItem("token");
 		api.defaults.headers.Authorization = undefined;
+		userContext.setUser(null);
 	}
 
-	return { authenticated, loading, handleLogin, handleLogout, user };
+	return { authenticated, loading, handleLogin, handleLogout };
 }
