@@ -16,8 +16,32 @@ class UsersRepository implements IUsersRepository {
 		return await this.repository.find();
 	}
 
-	async create(data: ICreateUserDTO): Promise<void> {
-		const user = this.repository.create(data);
+	async create({
+		id,
+		name,
+		password,
+		email,
+		birthday,
+		age = "1",
+		cpf,
+		fone_number,
+		profession,
+		salary,
+		avatar = "",
+	}: ICreateUserDTO): Promise<void> {
+		const user = this.repository.create({
+			id,
+			name,
+			password,
+			email,
+			birthday,
+			age,
+			cpf,
+			fone_number,
+			profession,
+			salary,
+			avatar,
+		});
 		await this.repository.save(user);
 	}
 
@@ -34,6 +58,7 @@ class UsersRepository implements IUsersRepository {
 		name,
 		description,
 		is_open = false,
+		reply = "",
 	}: ICreateSolicitationsDTO): Promise<void> {
 		const solicitationRepo = AppDataSource.getRepository(Solicitations);
 		const solicitation = solicitationRepo.create({
@@ -41,6 +66,7 @@ class UsersRepository implements IUsersRepository {
 			description,
 			user_id,
 			is_open,
+			reply,
 		});
 		await solicitationRepo.save(solicitation);
 	}
