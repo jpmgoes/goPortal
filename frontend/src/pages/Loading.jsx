@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/AppContext";
@@ -5,18 +6,13 @@ import loadingImg from "../img/loading.gif";
 
 export const Loading = () => {
 	const navigate = useNavigate();
-	const context = useContext(Context);
-	console.log("loading");
+	const { userContext } = useContext(Context);
 
 	useEffect(() => {
-		if (context.authContext.authenticated)
-			navigate(context.authContext.loading);
-		else navigate("/login");
-	}, [
-		context.authContext.authenticated,
-		context.authContext.loading,
-		navigate,
-	]);
+		if (userContext.user) {
+			navigate(userContext.loading);
+		} else if (!userContext.authenticated) navigate("/login");
+	}, [userContext.user, userContext.loading]);
 
 	return (
 		<div className="loading">
