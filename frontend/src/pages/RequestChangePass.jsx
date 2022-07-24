@@ -1,27 +1,33 @@
-import React, { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from "react";
 import { EmailForm } from "../components/forms/EmailForm";
 import { TemplateFormPages } from "../components/templates/TemplateFormPages";
 import { Context } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
 
 export const RequestChangePass = () => {
 	const { userContext } = useContext(Context);
-	const [error, setError] = useState(<></>);
+	const navigator = useNavigate();
+
+	useEffect(() => {
+		if (userContext.response?.status === 201) {
+			toast("Email de recuperação enviado com sucesso");
+			navigator("/login");
+		} else if (userContext.response?.status === 400) {
+			toast("Email não cadastrado!");
+		}
+		userContext.setResponse(null);
+	}, [userContext.response]);
 
 	const onSubmit = ({ email }) => {
-		userContext.handleRequestNewPassword(email.trim());
-		if (!userContext.error)
-			setError(<p className="error">*Erro ao enviar email</p>);
-		else if (userContext.error["status"] === 400) {
-			setError(<p className="error">*Email não cadastrado</p>);
-		} else if (userContext.error["status"] === 201) {
-			alert("Email de recuperação de senha enviado com sucesso!");
-			setError("");
-		}
+		userContext.handleRequestNewPassword(email);
 	};
 
 	return (
 		<TemplateFormPages title={"SOLICITAR NOVA SENHA"}>
-			<EmailForm onSubmit={onSubmit} error={error}></EmailForm>
+			<EmailForm onSubmit={onSubmit} ></EmailForm>
 		</TemplateFormPages>
 	);
 };
