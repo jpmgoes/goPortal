@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/AppContext";
 import defaultAvatarIcon from "../img/avatar.webp";
+import { toast } from "react-toastify";
 
-export const ImageUpload = () => {
+export const ImageUpload = ({ addpage }) => {
 	const [preview, setPreview] = useState(defaultAvatarIcon);
 	const { userContext } = useContext(Context);
 
@@ -14,11 +15,11 @@ export const ImageUpload = () => {
 			setPreview(defaultAvatarIcon);
 			return;
 		}
-
-		const objectUrl = URL.createObjectURL(userContext.userImg);
-		setPreview(objectUrl);
-
-		return () => URL.revokeObjectURL(objectUrl);
+		try {
+			const objectUrl = URL.createObjectURL(userContext.userImg);
+			setPreview(objectUrl);
+			return () => URL.revokeObjectURL(objectUrl);
+		} catch (error) {}
 	}, [userContext.userImg]);
 
 	const onSelectFile = (e) => {
@@ -29,16 +30,22 @@ export const ImageUpload = () => {
 
 		if (fileValidation(e.target.files[0]))
 			userContext.setUserImg(e.target.files[0]);
-		else alert("A imagem deve ser do tipo jpeg ou png");
+		else toast("A imagem deve ser do tipo jpeg ou png");
 	};
 
+	const addpageclass = addpage ? "add-img-page" : "";
+
 	return (
-		<>
-			<input type="file" onChange={onSelectFile} />
+		<div className={`img-upload-container ${addpageclass}`}>
+			<input
+				className="custom-file-input"
+				type="file"
+				onChange={onSelectFile}
+			/>
 			<div className="avatar">
 				<img src={preview} alt="avatar" />
 			</div>
-		</>
+		</div>
 	);
 };
 
