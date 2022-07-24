@@ -1,5 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { Table } from "../components/Table";
+import { MainTemplate } from "../components/templates/MainTemplate";
 import { Context } from "../context/AppContext";
+import { useAuthHook } from "../context/hooks/useAuthHook";
+import { Loading } from "./Loading";
+import { UploadImagePage } from "../pages/UploadImagePage";
 
 const Home = () => {
 	const navigate = useNavigate();
