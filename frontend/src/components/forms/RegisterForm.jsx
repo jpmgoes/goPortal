@@ -1,79 +1,104 @@
 import { useForm } from "react-hook-form";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { ShowPass } from "../ShowPass";
 import { useState } from "react";
 
-const schema = yup
-	.object({
-		name: yup.string().required("Nome é obrigatório"),
-		password: yup
-			.string()
-			.required("Senha é obrigatória")
-			.min(8, "Senha deve ter no mínimo 8 caracteres")
-			.matches(/[a-zA-Z]/, "Senha deve conter letras latinas."),
-		email: yup
-			.string()
-			.required("Email é obrigatório")
-			.email("Email inválido"),
-		birthday: yup.string().required("Data de nascimento é obrigatória"),
-		cpf: yup
-			.string()
-			.required("CPF é obrigatório")
-			.matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, "CPF inválido"),
-		fone_number: yup.string().required("Telefone é obrigatório"),
-		profession: yup.string().required("Profissão é obrigatória"),
-		salary: yup
-			.string()
-			.required("Salário é obrigatório")
-			.matches(/^\d{1,}$/, "Salário inválido"),
-	})
-	.required();
 export const RegisterForm = ({ onSubmit }) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
-		resolver: yupResolver(schema),
-	});
+	} = useForm();
 
 	const [passShown, setPassShown] = useState("password");
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			{errors.name?.message}
-			<input placeholder="Name" {...register("name")} />
-			{errors.email?.message}
-			<input placeholder="Email" {...register("email")} type="email" />
-			{errors.password?.message}
+		<form onSubmit={handleSubmit(onSubmit)} className="register-form">
+			{joinNameEmailDatePass({
+				errors,
+				register,
+				passShown,
+				setPassShown,
+			})}
+			{joinCpfProfPhoneSalary({ errors, register })}
 			<input
-				placeholder="Password"
-				{...register("password")}
-				type={passShown}
+				className="button button-register-form"
+				type="submit"
+				value="Cadastrar"
 			/>
-			<ShowPass setPassShown={setPassShown} passShown={passShown} />
-
-			{errors.birthday?.message}
-			<input {...register("birthday")} type="date" />
-			{errors.cpf?.message}
-			<input placeholder="cpf" {...register("cpf")} />
-			{errors.fone_number?.message}
-			<input
-				placeholder="Celular"
-				{...register("fone_number")}
-				type="tel"
-			/>
-			{errors.profession?.message}
-			<input placeholder="Profissão" {...register("profession")} />
-			{errors.salary?.message}
-			<input
-				placeholder="Salário"
-				{...register("salary")}
-				type="number"
-			/>
-			<input className="button" type="submit" />
 		</form>
 	);
 };
+
+function joinNameEmailDatePass({ errors, register, passShown, setPassShown }) {
+	return (
+		<div className="nameEmailDatePass">
+			{errors.name && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Name"
+				{...register("name", { required: true })}
+			/>
+			{errors.email && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Email"
+				{...register("email", { required: true })}
+				type="email"
+			/>
+
+			{errors.birthday && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input {...register("birthday", { required: true })} type="date" />
+
+			{errors.password && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Password"
+				{...register("password", { required: true })}
+				type={passShown}
+			/>
+			<ShowPass
+				customClass="showPass"
+				setPassShown={setPassShown}
+				passShown={passShown}
+			/>
+		</div>
+	);
+}
+
+function joinCpfProfPhoneSalary({ errors, register }) {
+	return (
+		<div className="cpfProfPhoneSalary">
+			{errors.cpf && <span className="warn-span">Campo Obrigatório</span>}
+			<input placeholder="cpf" {...register("cpf", { required: true })} />
+			{errors.fone_number && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Celular"
+				{...register("fone_number", { required: true })}
+				type="tel"
+			/>
+			{errors.profession && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Profissão"
+				{...register("profession", { required: true })}
+			/>
+			{errors.salary && (
+				<span className="warn-span">Campo Obrigatório</span>
+			)}
+			<input
+				placeholder="Salário"
+				{...register("salary", { required: true })}
+				type="number"
+			/>
+		</div>
+	);
+}
