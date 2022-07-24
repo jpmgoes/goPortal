@@ -5,20 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { ShowPass } from "../ShowPass";
 
-const schema = yup
-	.object({
-		password: yup
-			.string()
-			.required("Senha é obrigatória")
-			.min(8, "Senha deve ter no mínimo 8 caracteres")
-			.matches(/[a-zA-Z]/, "Senha deve conter letras latinas."),
-		confirm_password: yup
-			.string()
-			.oneOf([yup.ref("password"), null], "A senha não confere"),
-	})
-	.required();
-
-export const ChangePassForm = ({ onSubmit }) => {
+export const ChangePassForm = ({ onSubmit, error }) => {
 	const {
 		register,
 		handleSubmit,
@@ -45,6 +32,7 @@ export const ChangePassForm = ({ onSubmit }) => {
 			/>
 			<ShowPass setPassShown={setPassShown} passShown={passShown} />
 			<input className="button" type="submit" />
+			{error}
 		</form>
 	);
 };
