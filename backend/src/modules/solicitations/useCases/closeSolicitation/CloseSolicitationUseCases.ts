@@ -55,6 +55,7 @@ class CloseSolicitationUseCases {
 		};
 
 		solicitation.is_open = false;
+		solicitation.reply = reply;
 		this.solicitationsRepository.create(solicitation);
 
 		await this.mailtrapMailProvider.sendMail(
