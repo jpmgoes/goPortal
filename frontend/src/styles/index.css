@@ -22,15 +22,9 @@ body {
 	scrollbar-width: none; /* Firefox */
 }
 
-.avatar img {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	margin: 0 auto;
-	display: block;
-	margin-bottom: 20px;
+button.Toastify__close-button.Toastify__close-button--light {
+	background-color: white;
+	width: 40px;
 }
 
 .loading {
@@ -43,4 +37,8 @@ body {
 }
 .loading img {
 	width: 100px;
+}
+
+p {
+	margin: 0;
 }

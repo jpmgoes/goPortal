@@ -1,7 +1,7 @@
 .error {
 	color: red;
 	font-size: 14px;
-	padding: 10px;
+	padding: 3px;
 }
 
 form {
@@ -12,15 +12,18 @@ form {
 	width: 300px;
 	height: 100%;
 	overflow: hidden;
+	gap: 10px;
+	height: 100%;
+	overflow: overlay;
 }
 
-input {
+input,
+button {
 	width: 100%;
-	height: 50px;
+	height: 40px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 0 10px;
-	margin-bottom: 10px;
 	font-size: 16px;
 	font-family: "Libre Franklin", sans-serif, "Roboto", sans-serif,
 		-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -31,12 +34,14 @@ input {
 	scrollbar-width: none; /* Firefox */
 }
 
-.button {
+.button,
+button {
 	cursor: pointer;
 	transition: all 0.3s ease-in-out;
 }
 
-.button:hover {
+.button:hover,
+button:hover {
 	background-color: #1a3754;
 	color: #fff;
 }
@@ -54,8 +59,195 @@ input.checkbox {
 }
 
 .show-pass-label {
+	display: flex;
+	white-space: nowrap;
+}
+
+.inputImage {
+	width: 100px;
+}
+
+.img-upload-container {
 	width: 100%;
 	display: flex;
-	align-items: baseline;
-	justify-content: end;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+
+	margin-bottom: 7px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+}
+.custom-file-input {
+	width: 150px;
+	border: none;
+}
+.custom-file-input::before {
+	content: "Select some files";
+	display: inline-block;
+	background: linear-gradient(top, #f9f9f9, #e3e3e3);
+	border: 1px solid #999;
+	border-radius: 3px;
+	padding: 5px 8px;
+	outline: none;
+	white-space: nowrap;
+	cursor: pointer;
+	text-shadow: 1px 1px #fff;
+	font-weight: 700;
+	font-size: 10pt;
+}
+.custom-file-input:hover::before {
+	border-color: black;
+}
+.custom-file-input:active::before {
+	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.log-out {
+	color: red;
+	background-color: transparent;
+}
+
+.log-out:hover {
+	color: white;
+	background-color: red;
+}
+
+.button {
+	background: #1a3754;
+	color: #fff;
+}
+
+.container-content-MainTemplate {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.MainTemplate-form {
+	display: grid;
+	grid-template-areas:
+		"a b"
+		"c c"
+		"d d";
+	align-items: stretch;
+	padding: 25px;
+	gap: 10px;
+}
+.MainTemplate-form input,
+.MainTemplate-form button {
+	width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+	.MainTemplate-form {
+		grid-template-areas:
+			"a"
+			"b"
+			"c"
+			"d";
+		gap: 15px;
+	}
+}
+.NamePass {
+	grid-area: a;
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+}
+
+.ProfPhoneSalary {
+	grid-area: b;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+.uploadImgUpdateAcc {
+	grid-area: c;
+}
+
+.BtnsUpdateAcc {
+	grid-area: d;
+	grid-area: d;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.checkboxUpdateAcc {
+	width: 60%;
+}
+form.formSolicitation {
+	display: flex;
+	max-width: 400px;
+	width: 100vw;
+}
+.solicitationPageTitle {
+	padding-top: 30px;
+	text-align: center;
+}
+.readonlyTextAreaSolicitations {
+	width: 100%;
+	min-height: 40px;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 16px;
+	color: #1a3754;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	word-break: break-all;
+}
+
+.readonlyTextAreaSolicitations-span {
+	color: #999;
+	font-size: 14px;
+	text-align: start;
+	align-self: flex-start;
+	font-weight: 700;
+	margin-bottom: -6px;
+	padding-left: 10px;
+	z-index: 3;
+}
+
+.warn-span {
+	color: red;
+	font-size: 12px;
+	font-weight: 700;
+	margin-bottom: -5px;
+	z-index: 1;
+	text-align: start;
+	align-self: flex-start;
+	padding-left: 10px;
+}
+.created-at-date,
+.created-at {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.created-at-date,
+.created-at-title {
+	min-height: 40px;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 16px;
+	color: #1a3754;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	word-break: break-all;
+}
+
+.created-at {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
 }

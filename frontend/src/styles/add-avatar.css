@@ -1,0 +1,15 @@
+.add-avatar-h5 {
+	width: 400px;
+}
+.add-img-container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.add-img-page {
+	padding-top: 10px;
+	display: flex;
+	justify-content: flex-end !important;
+	flex-direction: row-reverse !important;
+}

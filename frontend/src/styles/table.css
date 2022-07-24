@@ -1,0 +1,189 @@
+.table {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 80vw;
+	padding-bottom: 20px;
+}
+.baseTableLayout {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+.solicitation {
+	display: grid;
+	grid-template-columns: 0.8fr 1fr 1fr 0.2fr 0.2fr;
+	gap: 5px;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.solicitationClosed-name {
+	text-decoration: line-through;
+	color: #888;
+}
+
+.solicitationName {
+	font-weight: 700;
+	font-size: 1.5rem;
+}
+
+.solicitationDescription {
+	color: #888;
+}
+.solicitationReply {
+	font-weight: 700;
+}
+
+.solicitation p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: default;
+}
+
+.solicitation span {
+	display: none;
+}
+
+@media screen and (max-width: 1060px) {
+	.solicitation span {
+		display: inline;
+		font-size: 0.7rem;
+		font-weight: 700;
+		color: #868686;
+	}
+
+	.solicitationTitleGroup {
+		display: none;
+	}
+	.solicitation {
+		grid-template-columns: 2fr 0.5fr 0.5fr;
+		grid-template-areas:
+			"a d e"
+			"b d e"
+			"c d e";
+	}
+
+	.solicitationName {
+		grid-area: a;
+	}
+	.solicitationDescription {
+		grid-area: b;
+	}
+	.solicitationReply {
+		grid-area: c;
+	}
+	.solicitationStatus {
+		grid-area: d;
+	}
+	.solicitationEditButton {
+		grid-area: e;
+	}
+}
+
+.solicitationEditButton {
+	background-color: #f0f0f0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 1px #b3b3b3;
+	border-radius: 7px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+.solicitationEditButton:hover {
+	background-color: #b6b6b6;
+}
+
+.addSolicitation {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.addSolicitation span {
+	display: flex;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+	align-items: center;
+	cursor: pointer;
+}
+
+.divider {
+	border-left: 1px solid #b6b6b6;
+	margin: 0 10px;
+	height: 20px;
+}
+
+p.solicitationTitle.order {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.search-form {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	gap: 10px;
+	grid-template-rows: 1fr;
+	grid-template-columns: auto 50px !important;
+}
+
+.search-solicitation {
+	padding: 0px;
+}
+
+.addSolicitation {
+	display: grid;
+	align-items: center;
+	gap: 10px;
+	grid-template-columns: 1fr minmax(219px, auto);
+}
+.search-form {
+	display: flex;
+	flex-direction: row;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+	gap: 0;
+}
+
+form.search-form {
+	display: flex;
+}
+
+.search-form input {
+	border: none;
+	outline: none;
+	background-color: #fff;
+	padding: 10px;
+	width: 100%;
+	color: #1a3754;
+}
+.search-button {
+	width: 50px;
+	background-color: #fff;
+	border: none;
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	justify-content: center;
+	margin-left: -10px;
+}
+.search-button:hover {
+	background-color: transparent;
+}
+.baseTableLayout.solicitation.solicitationTitleGroup > p {
+	margin: 0px;
+	width: 80px;
+}

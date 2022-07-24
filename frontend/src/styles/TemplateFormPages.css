@@ -1,48 +1,83 @@
-.content-TemplateFormPages {
+.background-TemplateFormPages.templateformpage-form {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 300px;
-	height: 100%;
-	overflow: hidden;
-}
-.container-TemplateFormPages {
-	background-color: #f5f5f5;
-
-	margin: 20px;
-
-	min-width: 200px;
-	min-height: 400px;
-
-	max-width: 400px;
-	max-height: 80vh;
-
-	border-radius: 2.2%;
-
-	padding: 20px;
-
-	-webkit-box-shadow: 6px 7px 14px -3px rgba(0, 0, 0, 0.21);
-	box-shadow: 6px 7px 14px -3px rgba(0, 0, 0, 0.21);
-
-	display: flex;
-	flex-direction: column;
-
-	overflow: overlay;
-}
-
-.title-TemplateFormPages {
-	margin-bottom: 30px;
-	text-align: center;
-	width: 300px;
-}
-
-.background-TemplateFormPages {
-	background-color: #151c48;
 	width: 100vw;
 	height: 100vh;
+}
 
+h1.title-TemplateFormPages {
+	padding-bottom: 10px;
+	width: 300px;
+}
+
+.wallpaper-container {
+	background-image: url("../img/log-in-wall.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 50vw;
+	flex-shrink: 1;
+	flex-grow: 1;
+}
+
+.container-TemplateFormPages {
+	width: 50vw;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	padding-left: 4%;
+}
+
+@media (max-width: 1060px) {
+	.wallpaper-container {
+		display: none;
+	}
+	.container-TemplateFormPages {
+		justify-content: center;
+		padding: 0;
+	}
+	.background-TemplateFormPages.templateformpage-form {
+		display: flex;
+		width: 100vw;
+		height: 100vh;
+		justify-content: center;
+	}
+}
+
+.register-form {
+	display: grid;
+	grid-template-areas:
+		"a b"
+		"c c"
+		"d d";
+	align-items: stretch;
+	gap: 10px;
+	width: 100%;
+}
+
+.nameEmailDatePass {
+	grid-area: a;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+.cpfProfPhoneSalary {
+	grid-area: b;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 10px;
+	width: 200px;
+}
+
+.showPass {
+	grid-area: c;
+}
+
+.button-register-form {
+	grid-area: d;
+	grid-area: d;
 }

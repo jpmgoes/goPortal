@@ -1,0 +1,59 @@
+.card-id {
+	display: flex;
+	padding-top: 20px;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-container {
+	width: 7.4cm;
+	height: 10.5cm;
+	padding: 0.5cm;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(90deg, #485563 0%, #29323c 100%);
+	color: #fff;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.card-front {
+	background-image: url("../img/front.png");
+}
+.card-verse {
+	background-image: url("../img/verse.png");
+}
+
+.card-avatar img {
+	width: 146px !important;
+	height: 146px;
+	border-radius: 100%;
+	background-color: #fff;
+	position: relative;
+	margin: 0px auto;
+	outline: 7px solid #fff;
+}
+.company-simple-logo img {
+	width: 80px;
+}
+.company-simple-logo {
+	padding: 20px;
+}
+
+.personal-info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.personal-info-name {
+	width: 200px;
+	color: #dadada;
+	text-align: center;
+	font-size: 10px;
+	font-weight: 700;
+}
