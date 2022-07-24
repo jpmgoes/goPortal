@@ -7,7 +7,10 @@ export const ImageUpload = () => {
 	const { userContext } = useContext(Context);
 
 	useEffect(() => {
-		if (!userContext.userImg) {
+		if (
+			!userContext.userImg ||
+			userContext.userImg === "http://localhost:3333/tmp/avatar/"
+		) {
 			setPreview(defaultAvatarIcon);
 			return;
 		}
