@@ -1,13 +1,14 @@
 import React from "react";
 
-export const ShowPass = ({ setPassShown, passShown }) => {
+export const ShowPass = ({ setPassShown, passShown, customClass }) => {
 	const handlePasswordShow = () => {
 		if (passShown === "text") setPassShown("password");
 		else setPassShown("text");
 	};
 
 	return (
-		<label className="show-pass-label">
+		<label className={`show-pass-label ${customClass}`}>
+
 			<input
 				className="checkbox"
 				type="checkbox"
@@ -16,6 +17,7 @@ export const ShowPass = ({ setPassShown, passShown }) => {
 				}}
 			/>
 			{"Mostrar Senha"}
+
 		</label>
 	);
 };
