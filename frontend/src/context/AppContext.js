@@ -5,13 +5,13 @@ import useUser from "./hooks/useUser";
 const Context = createContext();
 
 const AppContext = ({ children }) => {
-	const soliticationContext = useSolicitation();
+	const solicitationContext = useSolicitation();
 	const userContext = useUser();
 
 	return (
 		<Context.Provider
 			value={{
-				soliticationContext,
+				solicitationContext,
 				userContext,
 			}}
 		>
