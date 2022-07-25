@@ -16,15 +16,41 @@ import {
 import { Search } from "./forms/Search";
 
 export const Table = () => {
-	const { soliticationContext } = useContext(Context);
+	const { solicitationContext, userContext } = useContext(Context);
 
-	const [solicitations, setSolicitations] = useState(
-		soliticationContext.solicitations ?? []
-	);
+	const [solicitations, setSolicitations] = useState([]);
+	const [isAllSolicitations, setIsAllSolicitations] = useState(false);
+
+	function getOwnSolicitations() {
+		return solicitationContext.solicitations.filter((solicitation) => {
+			return solicitation.user_id === userContext.user?.id;
+		});
+	}
+
+	function showSolicitation() {
+		const btns = document.querySelectorAll(".set-all-or-own-btn");
+		console.log(btns);
+		if (!isAllSolicitations) {
+			setSolicitations(getOwnSolicitations() ?? []);
+			btns[0].style.color = "white";
+			btns[0].style.backgroundColor = "#1a3754";
+
+			btns[1].style.color = "#1a3754";
+			btns[1].style.backgroundColor = "white";
+		} else {
+			setSolicitations(solicitationContext.solicitations ?? []);
+			btns[1].style.color = "white";
+			btns[1].style.backgroundColor = "#1a3754";
+
+			btns[0].style.color = "#1a3754";
+			btns[0].style.backgroundColor = "white";
+		}
+	}
 
 	useEffect(() => {
-		setSolicitations(soliticationContext.solicitations ?? []);
-	}, [soliticationContext.solicitations]);
+		showSolicitation();
+		console.log(solicitations);
+	}, [solicitationContext.solicitations]);
 
 	const [searchData, setSearchData] = useState(null);
 	const [orderByName, setOrderByName] = useState(null);
@@ -90,6 +116,10 @@ export const Table = () => {
 	}
 
 	useEffect(() => {
+		showSolicitation();
+	}, [isAllSolicitations]);
+
+	useEffect(() => {
 		if (searchData) {
 			handleSearch(searchData);
 			setSearchData(null);
@@ -146,6 +176,21 @@ export const Table = () => {
 				</p>
 			</div>
 
+			<div className="set-all-or-own-container">
+				<button
+					className="set-all-or-own-btn"
+					onClick={() => setIsAllSolicitations(false)}
+				>
+					Minhas Solicitações
+				</button>
+				<button
+					className="set-all-or-own-btn"
+					onClick={() => setIsAllSolicitations(true)}
+				>
+					Todas Solicitações
+				</button>
+			</div>
+
 			{solicitations?.map((solicitation, index) => {
 				if (solicitation.isNotVisible) return <></>;
 				return (
@@ -154,7 +199,11 @@ export const Table = () => {
 						id={`solicitation${index}`}
 						className={`solicitation baseTableLayout`}
 					>
-						{createTable(solicitation, navigate, index)}
+						{createTable(
+							solicitation,
+							navigate,
+							userContext.user?.id
+						)}
 					</div>
 				);
 			})}
@@ -162,7 +211,11 @@ export const Table = () => {
 	);
 };
 
-function createTable({ name, description, reply, is_open, id }, navigate) {
+function createTable(
+	{ name, description, reply, is_open, id, user_id },
+	navigate,
+	userId
+) {
 	let closedClass = "";
 	if (!is_open) closedClass = "solicitationClosed-name";
 	return (
@@ -204,7 +257,7 @@ function createTable({ name, description, reply, is_open, id }, navigate) {
 				className="solicitationEditButton"
 				onClick={() => navigate(`/solicitation?token=${id}`)}
 			>
-				{is_open ? (
+				{is_open && user_id === userId ? (
 					<AiFillEdit size={"1.4rem"} />
 				) : (
 					<AiFillEye size={"1.4rem"} />
