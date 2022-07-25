@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 import { AiOutlineSearch } from "react-icons/ai";
 
-export const Search = ({ onSubmit, title }) => {
+export const Search = ({ onSubmit }) => {
 	const { register, handleSubmit } = useForm();
 
 	return (
@@ -13,7 +13,7 @@ export const Search = ({ onSubmit, title }) => {
 		>
 			<input
 				className="search-input"
-				placeholder={title}
+				placeholder="Pesquisar"
 				{...register("search")}
 				autoComplete="off"
 			/>
