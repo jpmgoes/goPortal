@@ -11,6 +11,7 @@ interface ISolicitationsRepository {
 	findByName(name: string): Promise<Solicitations>;
 	findById(id: string): Promise<Solicitations>;
 	list(user_id: string): Promise<Solicitations[]>;
+	listAll(): Promise<Solicitations[]>;
 }
 
 export { ISolicitationsRepository };
