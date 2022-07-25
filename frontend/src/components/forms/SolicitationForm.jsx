@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AiOutlineSchedule } from "react-icons/ai";
+import { Context } from "../../context/AppContext";
 
 export const SolicitationForm = ({ onSubmit, solicitation }) => {
 	const {
@@ -10,8 +11,9 @@ export const SolicitationForm = ({ onSubmit, solicitation }) => {
 		formState: { errors },
 	} = useForm();
 
-	const [solicitationData, setSolicitationData] = useState(solicitation);
+	const { userContext } = useContext(Context);
 
+	const [solicitationData, setSolicitationData] = useState(solicitation);
 	const [create, setCreate] = useState(solicitation ? false : true);
 	const [created_at, setCreated_at] = useState(solicitation ? false : true);
 
@@ -26,6 +28,12 @@ export const SolicitationForm = ({ onSubmit, solicitation }) => {
 				.join("-")
 		);
 	}, [solicitation]);
+
+	const replyHandledValue =
+		solicitationData?.is_open &&
+		solicitationData?.user_id !== userContext.user?.id;
+
+	console.log(!replyHandledValue && (solicitationData?.is_open || create));
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="formSolicitation">
@@ -57,7 +65,8 @@ export const SolicitationForm = ({ onSubmit, solicitation }) => {
 				register,
 				"reply",
 				"Resposta",
-				!solicitationData?.is_open
+				!solicitationData?.is_open,
+				replyHandledValue
 			)}
 			{created_at ? (
 				<>
@@ -73,7 +82,7 @@ export const SolicitationForm = ({ onSubmit, solicitation }) => {
 				<></>
 			)}
 
-			{solicitationData?.is_open || create ? (
+			{!replyHandledValue && (solicitationData?.is_open || create) ? (
 				<input className="button" type="submit" />
 			) : (
 				<></>
@@ -82,7 +91,14 @@ export const SolicitationForm = ({ onSubmit, solicitation }) => {
 	);
 };
 
-function handleInputForm(value, register, key, title, hiddenCaseBool = false) {
+function handleInputForm(
+	value,
+	register,
+	key,
+	title,
+	hiddenCaseBool = false,
+	cantEdit = false
+) {
 	return (
 		<>
 			{value ? (
@@ -98,7 +114,7 @@ function handleInputForm(value, register, key, title, hiddenCaseBool = false) {
 				<input
 					placeholder={title}
 					{...register(key, { required: true })}
-					readOnly={value}
+					readOnly={value || cantEdit}
 				/>
 			)}
 		</>
