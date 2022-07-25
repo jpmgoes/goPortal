@@ -6,7 +6,6 @@ import { Context } from "../context/AppContext";
 export const IdCard = () => {
 	const { userContext } = useContext(Context);
 	const user = userContext.user;
-	console.log(user);
 
 	return (
 		<div className="card-id">
