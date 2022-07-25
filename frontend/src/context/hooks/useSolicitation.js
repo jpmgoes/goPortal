@@ -4,10 +4,11 @@ import api from "../../api";
 
 export default function useSolicitation() {
 	const [solicitations, setSolicitations] = useState([]);
+	const [allSolicitations, setAllSolicitations] = useState([]);
 	const [response, setResponse] = useState(null);
 
 	useEffect(() => {
-		getSolicitations();
+		getAllUsersSolicitations();
 	}, []);
 
 	async function getSolicitations() {
@@ -59,6 +60,24 @@ export default function useSolicitation() {
 		}
 	}
 
+	async function getAllUsersSolicitations() {
+		const token = localStorage.getItem("token");
+		if (token) {
+			try {
+				const res = await api.get("/solicitation/all");
+				const data = res.data.reverse();
+
+				data.forEach((solicitation) => {
+					Object.assign(solicitation, {
+						isNotVisible: false,
+					});
+				});
+
+				setSolicitations(data);
+			} catch (error) {}
+		}
+	}
+
 	return {
 		solicitations,
 		setSolicitations,
@@ -67,5 +86,8 @@ export default function useSolicitation() {
 		getSolicitations,
 		createSolicitation,
 		closeSolicitation,
+		getAllUsersSolicitations,
+		allSolicitations,
+		setAllSolicitations,
 	};
 }
