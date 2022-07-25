@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Loading } from "./Loading";
 
 export const Solicitation = () => {
-	const { soliticationContext } = useContext(Context);
+	const { solicitationContext } = useContext(Context);
 	const { userContext } = useContext(Context);
 
 	const token = window.location.href.split("=")[1]?.split("/")[0];
@@ -24,7 +24,7 @@ export const Solicitation = () => {
 
 	useEffect(() => {
 		const token = window.location.href.split("=")[1]?.split("/")[0];
-		const value = soliticationContext.solicitations?.find(
+		const value = solicitationContext.solicitations?.find(
 			(solicitation) => solicitation.id === token
 		);
 
@@ -33,12 +33,12 @@ export const Solicitation = () => {
 		if (!token || !value) setPageTitle("Fazer uma solicitação");
 		else if (value?.is_open) setPageTitle("Adicionar uma resposta");
 		else setPageTitle("Solicitação");
-	}, [soliticationContext.solicitations]);
+	}, [solicitationContext.solicitations]);
 
 	useEffect(() => {
-		if (soliticationContext.response?.status === 200) {
+		if (solicitationContext.response?.status === 200) {
 			if (
-				soliticationContext.response.request.responseURL ===
+				solicitationContext.response.request.responseURL ===
 				"http://localhost:3333/solicitation"
 			) {
 				toast("Solicitação enviada com sucesso!");
@@ -46,18 +46,18 @@ export const Solicitation = () => {
 				toast("Resposta enviada com sucesso!");
 			}
 			navigate("/");
-			soliticationContext.setResponse(null);
-			soliticationContext.getSolicitations();
+			solicitationContext.setResponse(null);
+			solicitationContext.getAllUsersSolicitations();
 		}
-	}, [soliticationContext.response]);
+	}, [solicitationContext.response]);
 
 	function onSubmit({ name, description, reply }) {
 		// create
 		if (name && description) {
-			soliticationContext.createSolicitation(name, description);
+			solicitationContext.createSolicitation(name, description);
 		} else if (reply) {
 			// update
-			soliticationContext.closeSolicitation(token, reply);
+			solicitationContext.closeSolicitation(token, reply);
 		}
 	}
 	if (!userContext.user) return <Loading />;
