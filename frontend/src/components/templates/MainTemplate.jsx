@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 export const MainTemplate = ({ children }) => {
 	const { userContext } = useContext(Context);
 	const [avatar, setAvatar] = useState(userContext.user?.avatar);
-	console.log(avatar);
 	if (avatar === "http://localhost:3333/tmp/avatar/" || avatar === undefined)
 		setAvatar(defaultAvatarIcon);
 	const navigate = useNavigate();
