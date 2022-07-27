@@ -2,6 +2,7 @@ import { injectable } from "tsyringe";
 import nodemailer, { Transporter } from "nodemailer";
 import * as fs from "fs";
 import Handlebars from "handlebars";
+import { IMailProvider } from "../IMailProvider";
 @injectable()
 class MailtrapMailProvider implements IMailProvider {
 	private client: Transporter;
