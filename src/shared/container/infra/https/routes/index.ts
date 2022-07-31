@@ -6,9 +6,12 @@ import { usersRouter } from "./users.routes";
 
 const router = Router();
 
+router.get("/", (req, res) => {
+	res.json("Hello World!");
+});
 router.use("/users", usersRouter);
 router.use(authenticateRouter);
-router.use("/password", passwordRouter)
-router.use("/solicitation", solicitationsRouter)
+router.use("/password", passwordRouter);
+router.use("/solicitation", solicitationsRouter);
 
 export { router };
