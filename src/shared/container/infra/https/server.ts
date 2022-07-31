@@ -6,7 +6,7 @@ import cors from "cors";
 
 import "../typeorm/database";
 import "../../../container";
-import "../../providers"
+import "../../providers";
 
 import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 //ex: http://localhost:3333/tmp/avatar/1234312-img.png
-app.use("/tmp", express.static("tmp"))
+app.use("/tmp", express.static("tmp"));
 
 app.use(router);
 
@@ -34,6 +34,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 	});
 });
 
-app.listen(3333, () => {
-	console.log("Server is running on port 3333");
+app.listen(process.env.PORT || 3333, function () {
+	console.log(
+		"Express server listening on port %d in %s mode",
+		this.address().port,
+		app.settings.env
+	);
 });
