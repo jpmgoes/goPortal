@@ -62,8 +62,8 @@ export const Table = () => {
 
 	function handleSearch(search) {
 		if (search?.bool) {
-			solicitations?.forEach((solicitations) => {
-				solicitations.isNotVisible = false;
+			solicitations?.forEach((solicitation) => {
+				solicitation.isNotVisible = false;
 			});
 			return;
 		}
